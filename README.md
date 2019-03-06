@@ -929,7 +929,7 @@
       ---
        - hosts: repl
       ```
-      修改var/master_slaves.yaml 告诉mysqltools那个ip是主那些ip是slave
+      修改vars/master_slaves.yaml 告诉mysqltools那个ip是主那些ip是slave
       ```
       #在创建一主多从环境时会用到的变量
       master_ip: 10.186.19.15
@@ -1029,7 +1029,7 @@
       ---
        - hosts: repl
       ```
-      修改var/multi_source_replication.yaml 告诉mysqltools那些ip是主那个ip是slave
+      修改vars/multi_source_replication.yaml 告诉mysqltools那些ip是主那个ip是slave
       ```
       #master_ips 定义多个master主机ip组成的列表
       master_ips:
@@ -2299,10 +2299,12 @@
 
       ---
 
-   5. ### 安装用于保存监控数据的mysql数据库
+   5. ### 安装用于保存监控数据的mysql数据库与pyton-3.6.2
       **mysql-8.0.xx 还刚出来；我在使用mysql-8.0.11这个版本时编译php出错了；最好还在这里用mysql-5.7.x版本的mysql**
       见([mysql单机](#mysql单机))
 
+      见([用ansible安装python](#用ansible安装python)) 如果你是用mysqltools来安装python-3.6.2的话它默认为把mysqltools-python这个包也给你安装上，mysqltool-python的主要功能之一就是mysql监控数据采集，所以这个轮子是你的zabbix监控系统所必要的。
+      
       ---
 
    6. ### 改配置文件中zabbix_server_ip这个配置项
@@ -2669,7 +2671,7 @@
 
    1. ### 安装mysql单机
       [mysql单机](#mysql单机)
-   2. ### 安装python
+   2. ### 用ansible安装python
       **mysqltools在自动化安装python的时候还会自动安装下些python包 django2.0.x、mysqlclient、uwsgi**
 
       **1):修改deploy/ansible/python/install_python.yaml文件中的hosts**
@@ -2680,7 +2682,7 @@
 
       **2):安装python**
       ```
-      ansible-playbook 
+      ansible-playbook install_python.yaml
       ```
       输出如下
       ```
